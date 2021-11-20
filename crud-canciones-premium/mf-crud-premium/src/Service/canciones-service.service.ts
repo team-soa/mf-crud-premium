@@ -52,8 +52,5 @@ export class CancionesServiceService {
     };
     return this.http.delete(this.URL + '/' + id , options);
   }
-  public eliminarCancionStorageOnly(id: string){
-     return this.http.delete(this.URL + '/' + id,  {params: {storageonly: true} ,
-       headers: new HttpHeaders().set('Authorization', 'bearer ' +this.cookieService.get("token"))});
-   }
+
 }
