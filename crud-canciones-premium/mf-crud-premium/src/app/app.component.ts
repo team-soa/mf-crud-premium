@@ -5,10 +5,12 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import * as fs from 'fs';
 import { CookieService } from "ngx-cookie-service";
 import { Cancion } from 'src/clases/cancion';
+import { fromEvent } from 'rxjs';
 import { CancionesServiceService } from 'src/Service/canciones-service.service';
 import { PlayerServiceService } from 'src/Service/player-service.service';
 import { ListaCancionesAuxService } from 'src/Service/lista-canciones-aux.service';
 import { ParserServiceService } from 'src/Service/parser-service.service';
+
 
 @Component({
   selector: 'mf-crud-premium',
@@ -16,6 +18,8 @@ import { ParserServiceService } from 'src/Service/parser-service.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  newSearch$ = fromEvent(window, "newSearch");
+
   title = 'mf-crud-premium';
   storageAccountName = 'soakaraokestorage';
   listaDeCacniones: Cancion[] = [];
@@ -26,12 +30,22 @@ export class AppComponent {
     private cookieService: CookieService, private listaCancionesService: ListaCancionesAuxService, private parser: ParserServiceService) { }
 
   ngOnInit(): void {
+    this.cookieService.set('tipoVistaActual', 'premium');
     this.listaCancionesService.sharedListaCanciones.subscribe(listaCanciones => this.listaDeCacniones = listaCanciones)
     this.service.obtenerListaCancionesPrivadas().subscribe(lista => {
       this.listaDeCacniones = lista;
       console.log(lista)
     })
+    this.validating();
   }
+
+  validating() {
+    this.newSearch$.subscribe((resp: any) => {
+      console.log(resp);
+      this.listaDeCacniones =resp.detail;
+    })
+  }
+
 
   fileContent: string = '';
 
@@ -79,6 +93,7 @@ export class AppComponent {
 
   public IrAStrem(item: Cancion): void {
     this.playerAux.cancion = item;
+    this.service.saveCancionStream(item)
     this.router.navigateByUrl('/stream');
 
   }
