@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  mfcrudpremium:
+    image: mfcrudpremium
+    build:
+      context: crud-canciones-premium/mf-crud-premium
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 4202:4202
