@@ -56,7 +56,8 @@ export class AppComponent {
     this.service.subirUnaCancion(this.cancionSubir).subscribe(respuesta => {
       console.log(respuesta);
       // @ts-ignore
-      this.cancionSubir.filename = respuesta.filename;
+      this.cancionSubir.filename = respuesta.song.filename;
+      console.log(this.cancionSubir)
       this.uploadFileToBlob(this.cancionSubir.filename);
       this.ngOnInit()
     }, error => console.log(error))

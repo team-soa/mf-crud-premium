@@ -8,7 +8,7 @@ import { Cancion } from 'src/clases/cancion';
   providedIn: 'root'
 })
 export class CancionesServiceService {
-  URL = 'http://20.114.82.7:4003/songs'
+  URL = 'http://20.114.105.27:4003/songs'
   constructor(private http: HttpClient, private cookieService: CookieService) {
   }
 
