@@ -53,6 +53,7 @@ export class AppComponent {
   public crearCancion(): void {
     this.cancionSubir.letra = this.playerAux.letra;
     this.cancionSubir.owner = JSON.parse(this.cookieService.get('user')).username
+    console.log("screeeeeaaaaam", this.cancionSubir.idioma);
     this.service.subirUnaCancion(this.cancionSubir).subscribe(respuesta => {
       console.log(respuesta);
       // @ts-ignore

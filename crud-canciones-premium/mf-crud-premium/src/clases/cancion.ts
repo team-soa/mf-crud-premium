@@ -6,5 +6,6 @@ export class Cancion{
     album: string = '';
     owner: string = '';
     url: string = '';
-    filename: string = '';
+  filename: string = '';
+  idioma: string = '';
   }
