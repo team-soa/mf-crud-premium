@@ -68,7 +68,7 @@ export class AppComponent {
     this.cancionActual = item;
   }
   public ediarCancionLetra() {
-    this.cancionActual.letra = this.playerAux.letra;
+    this.cancionActual.letra = this.playerAux.cancion.letra;
     this.service.editarCancion(this.cancionActual._id, this.cancionActual).subscribe(respuesta => {
       console.log(respuesta)
       this.ngOnInit();
